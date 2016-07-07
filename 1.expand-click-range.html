@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Expand click range</title>
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<style>
+	.check{
+		width: 48px;
+		height: 48px;
+		background-color: #0ff;
+		position: relative;
+		/*z-index: -2;*/
+	}
+	input{
+		/*opacity: 0;*/
+		width: 100%;
+		height: 100%;
+	}
+	.check-bg{
+		background: url(img/1.jpg) no-repeat;
+	    position: absolute;
+	    width: 16px;
+	    height: 16px;
+	    background-size: cover !important;
+	    display: block;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    pointer-events: none;	/*点击穿透*/
+	}
+	.flx{
+		display: flex;
+	}
+	.check img{
+	    position: absolute;
+	    pointer-events: none;
+	    display: block;
+	    width: 16px;
+	    height: 16px;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	}
+	.check-tips{
+		line-height: 48px;
+	}
+</style>
+</head>
+<body>
+	<div class="flx">
+		<div class="check">
+			<span class="check-bg"></span>
+			<input type="checkbox" id="checked_bg" checked="checked">
+		</div>
+		<div class="check-tips">公开提问，答案每被偷偷听1次，你从中分成￥0.49</div>
+	</div>
+
+	<div class="flx">
+		<div class="check">
+			<img class="check-img" src="img/1.jpg" alt="">
+			<input type="checkbox" id="checked_img" checked="checked">
+		</div>
+		<div class="check-tips">是否匿名</div>
+	</div>
+	
+
+<script>
+	$(function(){
+
+		var checkRange = {
+			is_bg: function(){
+				$(".check").on('click', '#checked_bg', function(){
+					if ($('#checked_bg').is(':checked')) {
+						console.log('--------------------')
+						$('span').css('background', "url(img/1.jpg) no-repeat")
+					}else{
+						$('span').css('background', "url(img/2.jpg) no-repeat")
+						console.log('+++++++++++++++++++++')
+					}
+				})
+			},
+
+			is_img: function(){
+				$(".check").on('click', '#checked_img', function(){
+					if($('#checked_img').is(':checked')){
+						$('.check-img').attr('src', 'img/1.jpg');
+					}
+					else{
+						$('.check-img').attr('src', 'img/2.jpg');
+					}
+				})
+			}
+		}
+
+		checkRange.is_bg();
+		checkRange.is_img();
+		
+	})
+</script>	
+</body>
+</html>
