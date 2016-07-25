@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table 切换</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<script src="bower_components/jquery/jquery.js"></script>
+
+<style>
+	ul{
+		padding: 0;
+	}
+	 .nav-list{
+        margin: 16px auto;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .content {
+        display: none;
+        width: 100%;
+        height: 200px;
+        margin: 16px auto;
+        text-align: center;
+        line-height: 200px;
+        font-size: 72px;
+        color: #ddd;
+        background-color: green;
+        border: 1px solid black;
+    }
+    .blck{
+		display: block;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center">table 切换</h1>
+
+		<ul class="nav nav-pills nav-justified">
+	        <li class="active" data-page='1'><a href="javascript:;">1</a></li>
+	        <li class="" data-page='2'><a href="javascript:;">2</a></li>
+	        <li class="" data-page='3'><a href="javascript:;">3</a></li>
+	        <li class="" data-page='4'><a href="javascript:;">4</a></li>
+	    </ul>
+
+		<div class="content-wrap">
+	        <div class="content">1</div>
+	        <div class="content">2</div>
+	        <div class="content">3</div>
+	        <div class="content">4</div>
+	    </div>
+
+	    
+	</div>
+
+
+<script>
+
+	$(function(){
+
+		// $(this).parents('.nav').find("a:first").addClass("active");
+
+		// $('.nav li').each(function(index){
+		// 	$(this).attr('name', 'tab_' + index)
+		// })
+
+		// $(".content-wrap .content").each(function (index) {
+	 //    	$(this).addClass("tab_" + index);
+		// 	$(this).parents('.bd').find('.content:first').addClass("active");
+		// });
+
+
+
+		$('.content-wrap').find('div:first').addClass('blck');
+
+		$('.nav').on('click', 'li', function(e){
+			e.preventDefault();
+			console.log("-----------------------");
+
+			if ($(this).hasClass == 'active') {
+				return false;
+			}else{
+				$('li').removeClass('active');
+				$('.content').removeClass('blck');
+
+				$(this).addClass('active');
+
+				var index = this.getAttribute('data-page');
+
+				console.log()
+
+				$('.content').eq(index-1).addClass('blck');
+			}
+		})
+
+
+	})
+
+
+</script>
+
+
+
+</body>
+</html>

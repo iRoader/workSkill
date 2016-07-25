@@ -1,0 +1,25 @@
+{
+  "name": "workSkill",
+  "homepage": "https://github.com/iRoader/workSkill",
+  "authors": [
+    "ykxie <ykxie@kaikeba.com>"
+  ],
+  "description": "workSkill base library",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.0.3"
+  },
+  "devDependencies": {
+    "jquery": "2.0.3",
+    "bootstrap": "3.3.6"
+  }
+}

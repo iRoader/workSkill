@@ -16,35 +16,11 @@ html
 	
 css
 
-	.check{
-		width: 48px;
-		height: 48px;
-		background-color: #0ff;
-		position: relative;
-	}
-	input{
-		opacity: 0;
-		width: 100%;
-		height: 100%;
-	}
-	img{
-	    position: absolute;
-	    pointer-events: none;
-	    display: block;
-	    width: 16px;
-	    height: 16px;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	}
-
+	var arr = ["大漠","W3cplus"];
+	console.log(arr instanceof Array); // true
 js
 
-	$(".check").on('click', '#checked_img', function(){
-		if($('#checked_img').is(':checked')){
-			$('.check-img').attr('src', 'img/1.jpg');
-		}
-		else{
-			$('.check-img').attr('src', 'img/2.jpg');
-		}
-	})
+	var arr = ["大漠","W3cplus"];
+	arr.constructor === Array
+
+###2、table 切换
