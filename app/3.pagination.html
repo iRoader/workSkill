@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分页</title>
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+	<script src="../bower_components/jquery/jquery.js"></script>
+	<script src="../bower_components/handlebars/handlebars.js"></script>
+	<script src="../bower_components/twbs-pagination/jquery.twbsPagination.js"></script>
+	<script src="../js/util.js"></script>
+
+</head>
+<body>
+	<div id="page-content"></div>
+	<ul id="pagination-demo" class="pagination-sm"></ul>
+
+<script id>
+	
+</script>
+
+
+<script>
+	var jsondata = {
+		'title':'handlebars使用入门', 
+		'author': 'gbtags.com', 
+		'intro': '基础JS模板引擎handlebars的初学者指南',
+        //下面定义一个新的数组属性tutorials
+        'tutorials':[
+            {'title': '第一节：handlebar 基础','duration':'5'},
+            {'title': '第二节：handlebar 表达式','duration':'3'},
+            {'title': '第三节：handlebar 辅助方法','duration':'1'},
+            {'title': '第四节：handlebar 内建辅助方法','duration':'6'}
+        ]
+	};
+
+	$('#pagination-demo').twbsPagination({
+        totalPages: 35,
+        visiblePages: 7,
+        onPageClick: function (event, page) {
+            $('#page-content').text('Page ' + page);
+        }
+    });
+</script>
+</body>
+</html>

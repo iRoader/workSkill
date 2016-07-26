@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*定义基础CSS*/
+		body{
+		  font-family: 'microsoft yahei', Arial, sans-serif;
+		}
+		section{
+		  border: 1px solid #CCC;
+		  padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 创建一个展示数据的容器section //-->
+
+	<section id="tutorial">
+	  
+	</section>
+
+	<!-- 导入jQuery类库 //-->
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script type='text/javascript' src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script>
+
+
+<script type="text/x-handlebars-template" id="tutorial-template">
+	<h1>{{ title }}</h1>
+	<p>{{ author }}</p>
+	<div>{{ intro}}</div>
+</script>
+
+<script>
+
+	$(function(){
+		var jsondata = {
+			'title': 'handlebars 使用入门',
+			'author': 'www.kiroader.com',
+			'intro': '基础js模板隐形handlebars的初学者指南'
+		};
+
+		var options = 'askjldfh';
+
+		//获取模板中的html结构
+		var source = $("#tutorial-template").html();
+		console.log(source);
+
+		//编译HTML文件生成对应的JS模板 
+		//生成template是一个handlebar返回的一个函数function(content, option)
+		var template = Handlebars.compile(source);
+		console.log(template);
+
+		//使用js模板处理需要显示的json数据，并生成对应的HTML文件
+		var html = template(jsondata);
+		console.log(html);
+
+		$('#tutorial').html(html);
+	})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>handbars</title>
+	
+	<script type="text/javascript" src="handlebars-v4.0.5.js"></script>
+	<script src="jquery-1.12.3.js"></script>
+</head>
+<body>
+
+<!-- 定义handlebars的模板  //-->
+<script type="text/x-handlebars-template" id="tutorial-template">
+	<h1>{{name}}</h1>
+	<p>{{content}}</p>
+</script>
+
+
+<script>
+
+	$(document).ready(function(){
+		// var source = $("#tutorial-template").html;
+
+		// var template = Handlebars.compile(source);
+
+		// var html = template(jsondata);
+
+		// var jsondata = {
+		// 	'title':'handlebars使用入门',
+		// 	'author': '<span class="author">gbtags.com</span>',
+		// 	'intro': '基础JS模板引擎handlebars的初学者指南'
+	 //    }
+
+  //   	$('#tutorial').html(html);
+
+
+    	var source   =  $("#tutorial-template").html();
+	    //预编译模板
+	    var template = Handlebars.compile(source);
+	    //模拟json数据
+	    var context = { name: "zhaoshuai", content: "learn Handlebars"};
+	    //匹配json内容
+	    var html = template(context);
+	    //输入模板
+	    $(body).html(html);
+	})
+	
+
+</script>
+
+
+
+<!-- <script type='text/javascript' src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script>
+	 -->
+</body>
+</html>

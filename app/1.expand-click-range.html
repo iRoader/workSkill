@@ -19,7 +19,7 @@
 		height: 100%;
 	}
 	.check-bg{
-		background: url(img/1.jpg) no-repeat;
+		background: url(../img/1.jpg) no-repeat;
 	    position: absolute;
 	    width: 16px;
 	    height: 16px;
@@ -59,7 +59,7 @@
 
 	<div class="flx">
 		<div class="check">
-			<img class="check-img" src="img/1.jpg" alt="">
+			<img class="check-img" src="../img/1.jpg" alt="">
 			<input type="checkbox" id="checked_img" checked="checked">
 		</div>
 		<div class="check-tips">是否匿名</div>
@@ -74,9 +74,9 @@
 				$(".check").on('click', '#checked_bg', function(){
 					if ($('#checked_bg').is(':checked')) {
 						console.log('--------------------')
-						$('span').css('background', "url(img/1.jpg) no-repeat")
+						$('span').css('background', "url(../img/1.jpg) no-repeat")
 					}else{
-						$('span').css('background', "url(img/2.jpg) no-repeat")
+						$('span').css('background', "url(../img/2.jpg) no-repeat")
 						console.log('+++++++++++++++++++++')
 					}
 				})
@@ -85,10 +85,10 @@
 			is_img: function(){
 				$(".check").on('click', '#checked_img', function(){
 					if($('#checked_img').is(':checked')){
-						$('.check-img').attr('src', 'img/1.jpg');
+						$('.check-img').attr('src', '../img/1.jpg');
 					}
 					else{
-						$('.check-img').attr('src', 'img/2.jpg');
+						$('.check-img').attr('src', '../img/2.jpg');
 					}
 				})
 			}

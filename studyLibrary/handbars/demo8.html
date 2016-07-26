@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>项目</title>
+	<style>
+		body{
+		  font-family: 'microsoft yahei',Arial,sans-serif;
+		}
+
+		button{
+		  padding: 10px 20px;
+		  background: #CCC;
+		  border: 1px solid #EEE;
+		  border-radius: 3px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 定义一个shotlist元素，用来展示来自dribbble的设计作品 //-->
+
+	<section id="shotlist"></section>
+
+	<!-- 添加一个页面的加载中指示 //-->
+
+	<div class="loading">加载中...</div>
+
+	<!-- 添加一个触发加载的按钮 //-->
+	<button id="showmore">更多设计</button>
+
+	<!-- 引用相关jquery, jribbble, handlebars类库 //-->
+
+	<script type="text/javascript" src="http://www.gbtags.com/gb/networks/uploads/44b0c6e7-0395-4825-bff4-5914e6153ee0/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://www.gbtags.com/gb/networks/uploads/44b0c6e7-0395-4825-bff4-5914e6153ee0/js/jquery.jribbble.min.js"></script>
+	<script type="text/javascript" src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script>
+
+	<!-- Handlebars模板定义  //-->
+	<script id="dribbble-template" type="text/x-handlebars-template">
+	  {{! 使用each来循环data中shots属性 }}
+	  {{#each shots}}
+	    <div>
+	      <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+	      <p>
+	        <img src="{{image_teaser_url}}" alt="{{title}}">
+	      </p>
+	    </div>
+	  {{/each}}
+	</script>
+
+	<script>
+		$(function(){
+		  //定义相关变量
+		  var $shotlist = $('#shotlist'), 
+		    pagenum=1, 
+		    $showmore = $('#showmore'),
+		     $loading=$('.loading');
+		     
+		  //定义加载dribbble设计作品的相关方法
+		  
+		  function loadshots() {
+		    $loading.show();
+		    
+		    //使用jribbble的回调函数来获取最受欢迎的设计作品
+		    $.jribbble.getShotsByList('popular', function(data){
+		    
+		    /*
+		      data对象的数据结构如下：
+		      
+		      data = {
+		        page: 1, 
+		        pages: 50,
+		        per_page: 24,
+		        shot: [
+		          {
+		            title: '...',
+		            url : '...',
+		            image_teaser_url : '...'
+		          },
+		          {
+		            title: '...',
+		            url : '...',
+		            image_teaser_url : '...'
+		          }
+		        ],
+		        total: 1200
+		      }
+		      
+		    */
+		    
+		    // 获取模板中定义的HTML结构
+		    var source = $("#dribbble-template").html();
+		    
+		    // 编译HTML生成对应的JS模板
+		     var template = Handlebars.compile(source);
+
+		    // 使用JS模板处理需要显示的JSON数据, 生成对应的HTML内容
+		     var html = template(data); 
+		     
+		     // 添加生成的HTML内容到对应页面元素中
+		     $shotlist.append(html);
+		     
+		     $loading.hide();              
+		    }, {page:pagenum, per_page:24}); 
+		  }
+		  
+		  //绑定方法到按钮，并且触发
+		  $showmore.on('click', loadshots);
+		  $showmore.trigger('click');
+		  
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*定义基础CSS*/
+		body{
+		  font-family: 'microsoft yahei', Arial, sans-serif;
+		}
+		section{
+		  border: 1px solid #CCC;
+		  padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 创建一个展示数据的容器section //-->
+
+	<section id="tutorial">
+	  
+	</section>
+
+	<!-- 导入jQuery类库 //-->
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script type='text/javascript' src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script>
+
+
+<!-- Handlebars模板中的路径使用  //-->
+<script id="tutorial-template" type="text/x-handlebars-template">
+	{{! 注意也可以使用this关键字和./标识当前路径，参考如下, 以下修改都正确 }}
+	{{./title}}
+	{{! 以下使用handlebars内建的辅助方法each来循环获取课程目录 }}
+ 	{{#each list}}
+	    {{! 注意在each块表达式中当前的层次是list属性对应这层 }}
+	    <p>
+	      {{title}} - 课时：{{duration}}分钟 | 讲师：{{../info.author}}
+	    </p>
+  	{{/each}}
+	<p>{{ title }}</p>
+  	{{#each list}}
+		<h1>{{ ../title }}</h1>
+  	{{/each}}
+</script>
+
+	
+<script>
+
+	/* Handlebars相关JS代码基础框架 */
+
+	$(function(){
+        //这里我们定义一个复杂一些的JSON数据
+		var jsondata = {
+          'title':'handlebars使用入门',
+          'info': {
+            'author':'gbtags.com',
+            'intro': '基础JS模板引擎handlebars的初学者指南'
+          },
+          'list':[
+              {'title': '第一节：handlebar基础','duration':'5'},
+              {'title': '第二节：handlebar 表达式','duration':'3'},
+              {'title': '第三节：handlebar 辅助方法','duration':'1'},
+              {'title': '第四节：handlebar 内建辅助方法','duration':'6'}
+          ]
+		 };
+         
+         // 获取模板中定义的HTML结构
+         var source = $("#tutorial-template").html();
+         
+         // 编译HTML生成对应的JS模板
+         var template = Handlebars.compile(source);
+         
+         // 使用JS模板处理需要显示的JSON数据, 生成对应的HTML内容
+         var html = template(jsondata);
+         
+         // 添加生成的HTML内容到对应页面元素中
+         $('#tutorial').html(html);
+
+	});
+</script>
+
+</body>
+</html>

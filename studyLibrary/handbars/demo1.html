@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*定义基础CSS*/
+		body{
+		  font-family: 'microsoft yahei', Arial, sans-serif;
+		}
+		section{
+		  border: 1px solid #CCC;
+		  padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 创建一个展示数据的容器section //-->
+
+	<section id="tutorial">
+	  
+	</section>
+
+	<!-- 导入jQuery类库 //-->
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+	/*Javascript源代码*/
+
+	$(function(){
+	  /* 定义在页面中展示的JSON数据，可以来自AJAX，开放API或者服务器后台*/
+	  var jsondata = {
+	    'title':'handlebars使用入门', 
+	    'author': 'gbtags.com',
+	    'intro': '基础JS模板引擎handlebars的初学者指南'
+	  }
+	  
+	  /* 可以使用+号来生成内容相关字符串 */
+	  
+	  /*
+	  var content = 
+	     '<h1>' + jsondata.title + '</h1>'
+	     + '<p>' + jsondata.author + '</p>'
+	     +  '<div>' + jsondata.intro + '</div>';
+	  
+	  $('#tutorial').append(content);
+	  */
+	  
+	  /* 对于老式浏览器，可能我们会使用数组来生成对应内容，性能将更好 */
+	  var content = [];
+	  
+	  content.push('<h1>' + jsondata.title + '</h1>');
+	  content.push('<p>作者：' + jsondata.author + '</p>');
+	  content.push('<div>概要：' + jsondata.intro + '</div>');
+
+	  var contents = [];
+	  contents.push('<h1>' + jsondata.title + '</h1>');
+	  contents.push('<p>' + jsondata.author + '</p>');
+	  contents.push('<div>' + jsondata.intro + '</div>');
+	  console.log(contents.join(''));
+	  $('#tutorial').append(contents.join(''));
+	  
+	/* 
+	   * 总结：
+	   * 使用以上代码编写方式，将HTML代码混杂在了JS代码中
+	   * 对于简单页面逻辑和数据结构的代码来说，可以接受
+	   * 但是对于复杂页面或者需要针对页面逻辑变更的话
+	   * 修改和维护代码成本很高
+	   */
+	  
+	});
+</script>
+
+</body>
+</html>

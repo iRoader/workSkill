@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ssss</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+<style type="text/css">
+	.content:first-child{ 
+		display: block;
+	}
+    button {
+        width: 120px;
+        height: 32px;
+        line-height: 32px;
+        background-color: #ccc;
+        font-size: 24px;
+    }
+    
+    .content {
+        display: none;
+        width: 100%;
+        height: 240px;
+        font-size: 32px;
+        color: #ddd;
+        background-color: green;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+
+	<div class="page-content" id="page-content">
+    	<div class="content">1</div>
+    	<div class="content">2</div>
+    	<div class="content">3</div>
+    	<div class="content">4</div>
+    </div>
+
+	<ul class="" id="page-list">
+	    <li class="btn" style="background-color: yellow;"><a href="#">1</a></li>
+	    <li class="btn"><a href="#">2</a></li>
+	    <li class="btn"><a href="#">3</a></li>
+	    <li class="btn"><a href="#">4</a></li>
+	    <li class="btn"><a href="#">5</a></li>
+	    <li class="btn"><a href="#">6</a></li>
+	    <li class="btn"><a href="#">7</a></li>
+	</ul>
+
+
+	<nav>
+	  <ul class="pagination">
+	    <li class="disabled">
+	      <a href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <li class="active"><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	    <li><a href="#">4</a></li>
+	    <li><a href="#">5</a></li>
+	    <li><a href="#">...</a></li>
+	    <li><a href="#">99</a></li>
+	    <li>
+	      <a href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+
+	<div class="showdata" id="tutorial">
+
+	</div>
+
+
+
+	<section id="tutorial">
+	  
+	</section>
+
+	
+
+
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="handlebars-v4.0.5.js"></script>
+<script type="text/javascript" src="jsondata.js"></script>
+
+<!-- <script id="list-templ" type="text/x-handlebars-template">
+	{{#each tutorials}}
+	<div>{{title}}</div>
+	{{/each}}
+</script> -->
+
+<script  id="content-template" type="text/x-handlebars-template">
+	{{#each data}}
+	<div class="content">
+		{{#each this}}
+		<p>{{name}}</p>
+		<p>{{sex}}</p>
+		{{/each}}
+	</div>
+	{{/each}}
+</script>
+
+
+<script  id="list-template" type="text/x-handlebars-template">
+	<li class="btn" style="background-color: yellow;"><a href="#">1</a></li>
+	{{#each this}}
+
+
+	10 10zhen 100shu   date 
+	100/10
+	<li class="btn"><a href="<% content_path%>/aa.htm?page={{this}}" date-page="{{this}}">{{this}}</a></li>
+	<li class="btn"><a href="<%= contextPath %>/pagination.htm?page={{this}}" date-page="{{this}}">{{this}}</a></li>
+
+	{{/each}}
+</script>
+
+
+
+<script id="tutorial-template" type="text/x-handlebars-template"> 
+  {{#each tutorials}}
+    <p>{{title}}</p>
+  {{/each}}
+</script>
+
+
+<script type="text/javascript">
+	// var page = {
+	// 	'data': [
+	// 		[{'name': 'aaaa', 'sex': 'man'},{'name': 'bbbb', 'sex': 'girl'}],
+	// 		[{'name': 'AAAA', 'sex': 'man'},{'name': 'BBBB', 'sex': 'girl'}],
+	// 		[{'name': 'DDDD', 'sex': 'man'},{'name': 'IIII', 'sex': 'girl'}],
+	// 		[{'name': 'EEEE', 'sex': 'man'},{'name': 'OOOO', 'sex': 'girl'}],
+	// 		[{'name': 'TTTT', 'sex': 'man'},{'name': 'PPPP', 'sex': 'girl'}]
+	// 	]
+	// };
+
+
+	// var source = $("#content-template").html();
+	// var template = Handlebars.compile(source);
+	// var html = template(page);
+	// $('#page-content').html(html);
+
+
+	// 生成页面列表
+	function getPageNum(num){
+		var id = [];
+		for( var i = 2; i <= num; i++){
+			id.push(i);
+		}
+		return id;
+	}
+
+	// var pageData = {}
+	var num = getPageNum(9);
+
+	// pageData.id = id;
+	
+	var source = $("#list-template").html();
+	var template = Handlebars.compile(source);
+	var html = template(num);
+	$('#page-list').html(html);
+
+
+
+    //定义数组并获取数组内各个的节点
+    var buttonArr = $('.btn');
+    var divArr = $('.content');
+    for (var i = 0; i < buttonArr.length; i++) {
+        buttonArr[i].onclick = function() {
+            //this 
+            // alert(this.innerHTML)
+            //for循环遍历button数组长度
+            for (var j = 0; j < buttonArr.length; j++) {
+                //重置所有的button样式
+                buttonArr[j].style.backgroundColor = "#ccc";
+                //给当前的(点击的那个)那个button添加样式
+                this.style.backgroundColor = "yellow";
+                //隐藏所有的div
+                divArr[j].style.display = "none";
+                //判断当前点击是按钮数组中的哪一个？
+                if (this == buttonArr[j]) {
+                    // alert(j);
+                    //显示点击按钮对应的div
+                    divArr[j].style.display = "block";
+                }
+            }
+        }
+    }
+    </script>
+
+<script>
+
+
+	// var dataPagin = [];
+	// var index = 0;
+	// var pageNum = data.length / 4;
+	// for(var i = 0; i < pageNum; i++){
+
+	// 	dataPagin[i] = data.slice(index,index+4);
+	// 	index += 4;
+	// }
+	// console.log(dataPagin);
+
+
+	// var _html
+	// function temp(select, data){
+	// 	var source = select.html();
+	// 	console.log(source)
+
+	// 	var template = Handlebars.compile(source);
+	// 	console.log(template)
+
+	// 	_html = template(data);
+	// 	console.log(_html)
+
+	// 	return _html;
+	// }
+
+	// var sel = $("#list-templ");
+
+	// temp(sel, data);
+
+
+
+
+	// 截取数组
+	// var dataPagin = [];
+	// var index = 0;
+	// var pagdata = {};
+	// pagdata.datas = [];
+	// var pageNum = jsondata.tutorials.length / 4;
+
+	// for(var i = 0; i < pageNum; i++){
+	// 	pagdata.datas.push(jsondata.tutorials.slice(index,index+4));
+	// 	index += 4;
+	// }
+
+	// console.log(pagdata);
+
+
+	// var source = $("#tutorial-template").html();
+	// var template = Handlebars.compile(source);
+	// var html = template(jsondata);
+	// $('#tutorial').html(html);
+
+
+
+</script>
+</body>
+</html>

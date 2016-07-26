@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "jquery": "2.0.3",
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "handlebars": "^4.0.5",
+    "twbs-pagination": "git@github.com:esimakin/twbs-pagination.git#^1.3.1"
   }
 }

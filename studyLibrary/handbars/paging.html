@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+</head>
+<body>
+	<nav>
+	  <ul class="pagination">
+	    <li class="disabled">
+	      <a href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <li class="active"><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	    <li><a href="#">4</a></li>
+	    <li><a href="#">5</a></li>
+	    <li><a href="#">...</a></li>
+	    <li><a href="#">99</a></li>
+	    <li>
+	      <a href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+
+	<nav>
+		<ul class="pagination" id="paging">
+
+		</ul>
+	</nav>
+
+
+	<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+	<!-- <script type='text/javascript' src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script> -->
+	<script type="text/javascript" src="handlebars-v4.0.5.js"></script>
+
+
+<script type="text/x-handlebars-template" id="paging-template">
+	<li class="disabled">
+	    <a href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	    </a>
+	</li>
+	<li class="active"><a href="#">1</a></li>
+	{{#each id}}
+	<li><a href="#">{{this}}</a></li>
+	{{/each}}
+	<li>
+	    <a href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	    </a>
+	</li>
+</script>
+
+<script>
+	function getPageNum(num){
+		var id = [];
+		for( var i = 2; i <= num; i++){
+			id.push(i);
+		}
+		return id;
+	}
+
+	var pageData = {}
+	var id = getPageNum(90);
+
+	pageData.id = id;
+
+	console.log(pageData);
+
+	//获取模板中的html结构
+	var source = $("#paging-template").html();
+	console.log(source);
+
+	//编译HTML文件生成对应的JS模板 
+	//生成template是一个handlebar返回的一个函数function(content, option)
+	var template = Handlebars.compile(source);
+	console.log(template);
+
+	//使用js模板处理需要显示的json数据，并生成对应的HTML文件
+	var html = template(pageData);
+	console.log(html);
+
+	$('#paging').html(html);
+
+	
+	
+
+	
+	
+	var paging = {
+		init: function(){
+
+		},
+		controller: function(){
+
+		}
+	}
+</script>
+</body>
+</html>

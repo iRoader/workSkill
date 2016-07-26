@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*定义基础CSS*/
+		body{
+		  font-family: 'microsoft yahei', Arial, sans-serif;
+		}
+		section{
+		  border: 1px solid #CCC;
+		  padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 创建一个展示数据的容器section //-->
+
+	<section id="tutorial">
+	  
+	</section>
+
+	<!-- 导入jQuery类库 //-->
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script type='text/javascript' src="http://www.gbtags.com/gb/networks/uploads/87c22f7e-b475-4837-b781-eb74ae423041/js/handlebars-v1.3.0.js"></script>
+
+
+<!-- Handlebars模板定义  //-->
+<script id="tutorial-template" type="text/x-handlebars-template">
+  <!-- {{! if可以帮助判断参数是否为false, undefined, null, "", [] 等值，如果是false则不在页面显示内容 }} -->
+  
+  {{#if author}}
+    作者：{{author.lastname}} {{author.firstname}}
+    <!-- {{! if也可以配合else使用，如下 }} -->
+  {{else}}
+     作者：无
+  {{/if}}
+</script>
+
+	
+<script>
+/* Handlebars相关JS代码基础框架 */
+
+$(function(){
+         //定义一些属性
+		 var jsondata = {
+           'title': 'Handlebars介绍',
+           'author': {
+              'firstname': 'terry',
+              'lastname': 'li'
+            }
+		 };
+         
+         // 获取模板中定义的HTML结构
+         var source = $("#tutorial-template").html();
+         
+         // 编译HTML生成对应的JS模板
+         var template = Handlebars.compile(source);
+         
+         // 使用JS模板处理需要显示的JSON数据, 生成对应的HTML内容
+         var html = template(jsondata);
+         
+         // 添加生成的HTML内容到对应页面元素中
+         $('#tutorial').html(html);
+});	
+	
+</script>
+
+</body>
+</html>
